@@ -33,7 +33,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
     pageController.addListener(() {
       setState(() {
         _curPageValue = pageController.page!;
-        print("Current value is " + _curPageValue.toString());
+        // print("Current value is " + _curPageValue.toString());
       });
     });
   }
@@ -269,7 +269,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
         children: [
           GestureDetector(
             onTap: () {
-              // Get.to(() => PopularFoodDetail());
+              
               Get.toNamed(RouteHelper.getPopularFood(index));
             },
             child: Container(

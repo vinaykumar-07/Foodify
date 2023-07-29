@@ -1,5 +1,6 @@
 import 'package:example1/controller/cart_controller.dart';
 import 'package:example1/data/repository/popular_product_repo.dart';
+import 'package:example1/models/cart_model.dart';
 import 'package:example1/models/products_model.dart';
 import 'package:example1/utilites/colors.dart';
 import 'package:flutter/material.dart';
@@ -37,7 +38,7 @@ class PopularProductController extends GetxController {
 
   void setQuantity(bool isIncrement) {
     if (isIncrement) {
-      print('increment ' + _quantity.toString());
+      print("number of items " + _quantity.toString());
       _quantity = checkQuantity(_quantity + 1);
     } else {
       print('decrement ' + _quantity.toString());
@@ -47,11 +48,15 @@ class PopularProductController extends GetxController {
   }
 
   checkQuantity(int quantity) {
-    if (quantity < 0) {
+    if ((inCartItem + quantity) < 0) {
       Get.snackbar('Item Count', "you can't reduce more",
           backgroundColor: AppColors.mainColor, colorText: Colors.white);
+      if (_inCartItem > 0) {
+        _quantity = -_inCartItem;
+        return _quantity;
+      }
       return 0;
-    } else if (quantity > 20) {
+    } else if ((inCartItem + quantity) > 20) {
       Get.snackbar(
         'Item Count',
         "you can't add more",
@@ -64,22 +69,35 @@ class PopularProductController extends GetxController {
     }
   }
 
-  void initProduct(CartController cart) {
+  void initProduct(ProductModel product, CartController cart) {
     _quantity = 0;
     _inCartItem = 0;
     _cart = cart;
+    var exist = false;
+    exist = _cart.existInCart(product);
+    print(" exist or not  ${ exist.toString()}");
+    if (exist) {
+      _inCartItem = _cart.getQuantity(product);
+    }
   }
 
   void addItem(ProductModel product) {
-    if (quantity > 0) {
-      _cart.addItem(product, _quantity);
-    } else {
-      Get.snackbar(
-        'Item Count',
-        "you should add atleast one item to your cart",
-        backgroundColor: AppColors.mainColor,
-        colorText: Colors.white,
-      );
-    }
+    _cart.addItem(product, _quantity);
+    _quantity = 0;
+    _inCartItem = _cart.getQuantity(product);
+    _cart.item.forEach((key, value) {
+      print(
+          "the id is ${value.id.toString()}  the quantity is ${value.quantity.toString()}");
+    });
+
+    update();
+  }
+
+  int get totelItem {
+    return _cart.totalItem;
+  }
+
+  List<CartModel> get getitems {
+    return _cart.getItems;
   }
 }

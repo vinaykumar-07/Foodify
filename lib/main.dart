@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
     Get.find<RecommendedProductController>().getRecommendedProductList();
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
+      title: 'Food Delivery',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
