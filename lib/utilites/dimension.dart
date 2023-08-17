@@ -50,6 +50,8 @@ class Dimension {
 
   // Bottum height
 
-  static double bottomHightBar = screenHeight / 7.033333333333333;
-}
+  static double bottomHeightBar = screenHeight / 7.03;
 
+  // splash
+  static double splashImage = screenHeight / 3.38;
+}

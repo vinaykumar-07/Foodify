@@ -14,7 +14,9 @@ import '../../controller/cart_controller.dart';
 
 class RecommendedFoodDetail extends StatelessWidget {
   final int pageId;
-  const RecommendedFoodDetail({super.key, required this.pageId});
+  final String page;
+  const RecommendedFoodDetail(
+      {super.key, required this.pageId, required this.page});
 
   @override
   Widget build(BuildContext context) {
@@ -23,41 +25,50 @@ class RecommendedFoodDetail extends StatelessWidget {
     Get.find<PopularProductController>()
         .initProduct(product, Get.find<CartController>());
     return Scaffold(
-        backgroundColor: Colors.white,
-        body: CustomScrollView(slivers: [
-          SliverAppBar(
-            automaticallyImplyLeading: false,
-            title: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                GestureDetector(
-                  onTap: () {
-                    Get.toNamed(RouteHelper.initial);
-                  },
-                  child: AppIcon(
-                    icon: Icons.clear,
-                  ),
+      backgroundColor: Colors.white,
+      body: CustomScrollView(slivers: [
+        SliverAppBar(
+          automaticallyImplyLeading: false,
+          title: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              GestureDetector(
+                onTap: () {
+                  if (page == "cartpage") {
+                    Get.toNamed(RouteHelper.getCartPage());
+                  } else {
+                    Get.toNamed(RouteHelper.getInitial());
+                  }
+                },
+                child: AppIcon(
+                  icon: Icons.clear,
+                  backgroundColor: Colors.white,
                 ),
-                GetBuilder<PopularProductController>(builder: (controller) {
-                  return Stack(
+              ),
+              GetBuilder<PopularProductController>(builder: (controller) {
+                return GestureDetector(
+                  onTap: () {
+                    if (controller.totelItem >= 1) {
+                      Get.toNamed(RouteHelper.cartPage);
+                    }
+                  },
+                  child: Stack(
                     children: [
-                      AppIcon(icon: Icons.shopping_cart_outlined),
-                      Get.find<PopularProductController>().totelItem >= 1
+                      AppIcon(
+                        icon: Icons.shopping_cart_outlined,
+                        backgroundColor: Colors.white,
+                      ),
+                      controller.totelItem >= 1
                           ? Positioned(
                               right: 0,
                               top: 0,
-                              child: GestureDetector(
-                                onTap: () {
-                                   
-                                  Get.toNamed(RouteHelper.cartPage);
-                                },
-                                child: AppIcon(
-                                  icon: Icons.circle,
-                                  size: 20,
-                                  iconColor: Colors.transparent,
-                                  backgroundColor: AppColors.mainColor,
-                                ),
-                              ))
+                              child: AppIcon(
+                                icon: Icons.circle,
+                                size: 20,
+                                iconColor: Colors.transparent,
+                                backgroundColor: AppColors.mainColor,
+                              ),
+                            )
                           : Container(),
                       Get.find<PopularProductController>().totelItem >= 1
                           ? Positioned(
@@ -72,55 +83,55 @@ class RecommendedFoodDetail extends StatelessWidget {
                               ))
                           : Container(),
                     ],
-                  );
-                })
-              ],
-            ),
-            expandedHeight: 300,
-            pinned: true,
-            bottom: PreferredSize(
-              preferredSize: Size(double.maxFinite, 20),
-              child: Container(
-                width: double.maxFinite,
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(Dimension.radius20),
-                    topRight: Radius.circular(Dimension.radius20),
                   ),
+                );
+              })
+            ],
+          ),
+          expandedHeight: 300,
+          pinned: true,
+          bottom: PreferredSize(
+            preferredSize: Size(double.maxFinite, 20),
+            child: Container(
+              width: double.maxFinite,
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(Dimension.radius20),
+                  topRight: Radius.circular(Dimension.radius20),
                 ),
-                padding: const EdgeInsets.only(
-                  top: 5,
-                  bottom: 10,
-                ),
-                child: Center(
-                    child:
-                        BigText(size: Dimension.font26, text: product.name!)),
               ),
-            ),
-            backgroundColor: AppColors.yellowColor,
-            flexibleSpace: FlexibleSpaceBar(
-              background: Image.network(
-                AppConstants.BASE_URL + AppConstants.UPLOAD_URL + product.img!,
-                width: double.maxFinite,
-                fit: BoxFit.cover,
+              padding: const EdgeInsets.only(
+                top: 5,
+                bottom: 10,
               ),
+              child: Center(
+                  child: BigText(size: Dimension.font26, text: product.name!)),
             ),
           ),
-          SliverToBoxAdapter(
-            child: Column(
-              children: [
-                Container(
-                  margin: EdgeInsets.only(
-                      left: Dimension.width20, right: Dimension.width20),
-                  child: ExpandableTextWidget(text: product.description!),
-                ),
-              ],
+          backgroundColor: AppColors.yellowColor,
+          flexibleSpace: FlexibleSpaceBar(
+            background: Image.network(
+              AppConstants.BASE_URL + AppConstants.UPLOAD_URL + product.img!,
+              width: double.maxFinite,
+              fit: BoxFit.cover,
             ),
           ),
-        ]),
-        bottomNavigationBar:
-            GetBuilder<PopularProductController>(builder: (controller) {
+        ),
+        SliverToBoxAdapter(
+          child: Column(
+            children: [
+              Container(
+                margin: EdgeInsets.only(
+                    left: Dimension.width20, right: Dimension.width20),
+                child: ExpandableTextWidget(text: product.description!),
+              ),
+            ],
+          ),
+        ),
+      ]),
+      bottomNavigationBar: GetBuilder<PopularProductController>(
+        builder: (controller) {
           return Column(
             mainAxisSize: MainAxisSize.min,
             children: [
@@ -163,7 +174,7 @@ class RecommendedFoodDetail extends StatelessWidget {
                 ),
               ),
               Container(
-                height: Dimension.bottomHightBar,
+                height: Dimension.bottomHeightBar,
                 padding: EdgeInsets.only(
                   top: Dimension.height30,
                   bottom: Dimension.width30,
@@ -201,7 +212,7 @@ class RecommendedFoodDetail extends StatelessWidget {
                     Container(
                       padding: EdgeInsets.only(
                           top: Dimension.height20,
-                          bottom: Dimension.height20,
+                          bottom: Dimension.height10,
                           left: Dimension.width20,
                           right: Dimension.width20),
                       decoration: BoxDecoration(
@@ -223,6 +234,8 @@ class RecommendedFoodDetail extends StatelessWidget {
               ),
             ],
           );
-        }));
+        },
+      ),
+    );
   }
 }

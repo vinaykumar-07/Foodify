@@ -6,15 +6,19 @@ import 'package:example1/data/repository/cart_repo.dart';
 import 'package:example1/data/repository/popular_product_repo.dart';
 import 'package:example1/data/repository/recommended_food_repo.dart';
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 Future<void> init() async {
+  final sharedPreferences = await SharedPreferences.getInstance();
+  Get.lazyPut(() => sharedPreferences);
+
   // AppiClient
   Get.lazyPut(() => ApiClient(appBaseUrl: "http://mvs.bslmeiyu.com"));
 
 // Repository
   Get.lazyPut(() => PopularProductRepo(apiClient: Get.find()));
   Get.lazyPut(() => RecommendedProductRepo(apiClient: Get.find()));
-  Get.lazyPut(() => CartRepo());
+  Get.lazyPut(() => CartRepo(sharedPreferences:Get.find()));
 
   // Controller
   Get.lazyPut(() => PopularProductController(popularProductRepo: Get.find()));

@@ -26,8 +26,8 @@ class PopularProductController extends GetxController {
   Future<void> getPopularProductList() async {
     Response response = await popularProductRepo.getPopularProductList();
     if (response.statusCode == 200) {
-      print('${response.statusCode}');
-      print('got products');
+      // print('${response.statusCode}');
+      // print('got products');
       _popularProductList = [];
       _popularProductList.addAll(Product.fromJson(response.body).products);
       // print(_popularProductList);
@@ -38,10 +38,10 @@ class PopularProductController extends GetxController {
 
   void setQuantity(bool isIncrement) {
     if (isIncrement) {
-      print("number of items " + _quantity.toString());
+      // print("number of items " + _quantity.toString());
       _quantity = checkQuantity(_quantity + 1);
     } else {
-      print('decrement ' + _quantity.toString());
+      // print('decrement ' + _quantity.toString());
       _quantity = checkQuantity(_quantity - 1);
     }
     update();
@@ -75,7 +75,7 @@ class PopularProductController extends GetxController {
     _cart = cart;
     var exist = false;
     exist = _cart.existInCart(product);
-    print(" exist or not  ${ exist.toString()}");
+    // print(" exist or not  ${ exist.toString()}");
     if (exist) {
       _inCartItem = _cart.getQuantity(product);
     }
@@ -85,16 +85,15 @@ class PopularProductController extends GetxController {
     _cart.addItem(product, _quantity);
     _quantity = 0;
     _inCartItem = _cart.getQuantity(product);
-    _cart.item.forEach((key, value) {
-      print(
-          "the id is ${value.id.toString()}  the quantity is ${value.quantity.toString()}");
+    _cart.items.forEach((key, value) {
+      // print("the id is ${value.id.toString()}  the quantity is ${value.quantity.toString()}");
     });
 
     update();
   }
 
   int get totelItem {
-    return _cart.totalItem;
+    return _cart.totalItems;
   }
 
   List<CartModel> get getitems {

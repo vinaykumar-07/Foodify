@@ -16,7 +16,8 @@ import '../../routes/route_helper.dart';
 
 class PopularFoodDetail extends StatelessWidget {
   int pageId;
-  PopularFoodDetail({super.key, required this.pageId});
+  String page;
+  PopularFoodDetail({super.key, required this.pageId, required this.page});
 
   @override
   Widget build(BuildContext context) {
@@ -58,44 +59,59 @@ class PopularFoodDetail extends StatelessWidget {
               children: [
                 GestureDetector(
                   onTap: () {
-                    Get.to(() => MainFoodPage());
+                    if (page == "cartpage") {
+                      Get.toNamed(RouteHelper.getCartPage());
+                    }else
+                    {
+                       Get.toNamed(RouteHelper.getInitial() );
+                    }
                   },
-                  child: AppIcon(icon: Icons.arrow_back_ios),
+                  child: AppIcon(
+                    icon: Icons.arrow_back_ios,
+                    backgroundColor: Colors.white,
+                  ),
                 ),
                 // adding cart items
                 GetBuilder<PopularProductController>(builder: (controller) {
-                  return Stack(
-                    children: [
-                      AppIcon(icon: Icons.shopping_cart_outlined),
-                      Get.find<PopularProductController>().totelItem >= 1
-                          ? Positioned(
-                              right: 0,
-                              top: 0,
-                              child: GestureDetector(
-                                onTap: () {
-                                  Get.toNamed(RouteHelper.cartPage);
-                                },
+                  return GestureDetector(
+                    onTap: () {
+                      if (controller.totelItem >= 1) {
+                        Get.toNamed(RouteHelper.cartPage);
+                      }
+                    },
+                    child: Stack(
+                      children: [
+                        AppIcon(
+                          icon: Icons.shopping_cart_outlined,
+                          iconColor: Colors.black54,
+                          backgroundColor: Colors.white,
+                        ),
+                        controller.totelItem >= 1
+                            ? Positioned(
+                                right: 0,
+                                top: 0,
                                 child: AppIcon(
                                   icon: Icons.circle,
                                   size: 20,
                                   iconColor: Colors.transparent,
                                   backgroundColor: AppColors.mainColor,
                                 ),
-                              ))
-                          : Container(),
-                      Get.find<PopularProductController>().totelItem >= 1
-                          ? Positioned(
-                              right: 5,
-                              top: 4,
-                              child: BigText(
-                                text: Get.find<PopularProductController>()
-                                    .totelItem
-                                    .toString(),
-                                size: 12,
-                                color: Colors.white,
-                              ))
-                          : Container(),
-                    ],
+                              )
+                            : Container(),
+                        Get.find<PopularProductController>().totelItem >= 1
+                            ? Positioned(
+                                right: 5,
+                                top: 4,
+                                child: BigText(
+                                  text: Get.find<PopularProductController>()
+                                      .totelItem
+                                      .toString(),
+                                  size: 12,
+                                  color: Colors.white,
+                                ))
+                            : Container(),
+                      ],
+                    ),
                   );
                 })
               ],
@@ -148,7 +164,7 @@ class PopularFoodDetail extends StatelessWidget {
       bottomNavigationBar: GetBuilder<PopularProductController>(
         builder: (popularProduct) {
           return Container(
-            height: Dimension.bottomHightBar,
+            height: Dimension.bottomHeightBar,
             padding: EdgeInsets.only(
               top: Dimension.height30,
               bottom: Dimension.width30,
