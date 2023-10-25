@@ -1,6 +1,5 @@
 import 'package:example1/controller/popular_product_controller.dart';
 import 'package:example1/controller/recommended_food_controller.dart';
-import 'package:example1/pages/cart/cart_page.dart';
 import 'package:example1/routes/route_helper.dart';
 import 'package:example1/utilites/app_constants.dart';
 import 'package:example1/utilites/colors.dart';

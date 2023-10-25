@@ -1,7 +1,5 @@
 import 'package:example1/controller/cart_controller.dart';
 import 'package:example1/controller/popular_product_controller.dart';
-import 'package:example1/pages/cart/cart_page.dart';
-import 'package:example1/pages/home/main_food_page.dart';
 import 'package:example1/utilites/app_constants.dart';
 import 'package:example1/utilites/colors.dart';
 import 'package:example1/utilites/dimension.dart';
@@ -61,9 +59,8 @@ class PopularFoodDetail extends StatelessWidget {
                   onTap: () {
                     if (page == "cartpage") {
                       Get.toNamed(RouteHelper.getCartPage());
-                    }else
-                    {
-                       Get.toNamed(RouteHelper.getInitial() );
+                    } else {
+                      Get.toNamed(RouteHelper.getInitial());
                     }
                   },
                   child: AppIcon(

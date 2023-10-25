@@ -2,7 +2,6 @@ import 'package:dots_indicator/dots_indicator.dart';
 import 'package:example1/controller/popular_product_controller.dart';
 import 'package:example1/controller/recommended_food_controller.dart';
 import 'package:example1/models/products_model.dart';
-import 'package:example1/pages/food/popular_food_detail.dart';
 import 'package:example1/utilites/app_constants.dart';
 import 'package:example1/utilites/colors.dart';
 import 'package:example1/utilites/dimension.dart';
@@ -12,7 +11,6 @@ import 'package:example1/widgets/icon_and_text_widget.dart';
 import 'package:example1/widgets/small_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 import '../../routes/route_helper.dart';
 
 class FoodPageBody extends StatefulWidget {
