@@ -118,7 +118,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
         // list of Recommended food
 
         SizedBox(
-          height: 780,
+          height: 600,
           child: GetBuilder<RecommendedProductController>(
               builder: (recommendedProduct) {
             return recommendedProduct.isLoaded
@@ -145,8 +145,8 @@ class _FoodPageBodyState extends State<FoodPageBody> {
                               // Image section
 
                               Container(
-                                width: 120,
-                                height: 120,
+                                width: Dimension.height30 * 4,
+                                height: Dimension.height30 * 4,
                                 margin: EdgeInsets.only(left: 5),
                                 decoration: BoxDecoration(
                                   borderRadius:

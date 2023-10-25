@@ -2,7 +2,7 @@
     package="se.pixolity.example1">
    <uses-permission android:name="android.permission.INTERNET" />
    <application
-        android:label="example1"
+        android:label="Food App"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher"
         android:usesCleartextTraffic="true"
