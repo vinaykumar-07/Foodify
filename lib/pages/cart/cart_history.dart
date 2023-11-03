@@ -48,7 +48,7 @@ class CartHistory extends StatelessWidget {
             .parse(getCartHistoryList[listCounter].time!);
         var inputDate = DateTime.parse(parseDate.toString());
 
-        var outputFormat = DateFormat("MM/dd/yyyy hh:mm a");
+        var outputFormat = DateFormat("MM/dd/yyyy hh:mm ");
         outputDate = outputFormat.format(inputDate);
       }
       return BigText(text: outputDate);
@@ -57,7 +57,7 @@ class CartHistory extends StatelessWidget {
     return Scaffold(
       body: Column(
         children: [
-          // Header or app bar
+          // Header or app bar of cart history page
           Container(
             height: Dimension.height20 * 5,
             color: AppColors.mainColor,
@@ -70,16 +70,15 @@ class CartHistory extends StatelessWidget {
                   text: "Cart History",
                   color: Colors.white,
                 ),
-               
                 AppIcon(
-                  icon: Icons.shopping_cart_outlined,
+                  icon: Icons.shopping_cart_outlined,                                                                                      
                   iconColor: AppColors.mainColor,
                   backgroundColor: Colors.white,
                 ),
               ],
             ),
           ),
-        // body
+          // body
           GetBuilder<CartController>(builder: (_cartController) {
             return _cartController.getCartHistoryList().length > 0
                 ? Expanded(
@@ -250,21 +249,3 @@ class CartHistory extends StatelessWidget {
     );
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
- 

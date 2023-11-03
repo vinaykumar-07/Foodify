@@ -14,7 +14,6 @@ class SignUpPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    
     // Controller
 
     var emailController = TextEditingController();
@@ -118,7 +117,7 @@ class SignUpPage extends StatelessWidget {
                         textController: passwordController,
                         hintText: "Password",
                         icon: Icons.password_sharp,
-                        // isObscure: true,
+                        isObsecure: true,
                       ),
                       SizedBox(
                         height: Dimension.height20,

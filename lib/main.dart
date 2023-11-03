@@ -1,6 +1,7 @@
 import 'package:example1/controller/cart_controller.dart';
 import 'package:example1/controller/popular_product_controller.dart';
 import 'package:example1/controller/recommended_food_controller.dart';
+import 'package:example1/pages/address/address_page.dart';
 import 'package:example1/routes/route_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -26,7 +27,7 @@ class MyApp extends StatelessWidget {
           theme: ThemeData(
             primarySwatch: Colors.blue,
           ),
-          // home: const SplachScreen(),
+        //  home: const AddressPage(),
           initialRoute: RouteHelper.getsplach(),
           getPages: RouteHelper.routes,
         );

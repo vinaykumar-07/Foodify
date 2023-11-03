@@ -1,5 +1,7 @@
 import 'package:example1/pages/account/account_page.dart';
-import 'package:example1/pages/auth/sign_in_page.dart';
+import 'package:example1/pages/address/address_page.dart';
+import 'package:example1/pages/cart/cart_page.dart';
+import 'package:example1/pages/order/order_page.dart';
 import 'package:example1/pages/home/main_food_page.dart';
 import 'package:example1/utilites/colors.dart';
 import 'package:flutter/material.dart';
@@ -18,8 +20,10 @@ class _HomePageState extends State<HomePage> {
   List pages = [
     // main page of the app
     const MainFoodPage(),
-    // signIn page of the app
-    const SignInPage(),
+    // Order page of the app
+    const AddressPage(),
+    // const CartPage(),
+
     // user can see the cart history
     const CartHistory(),
     // user profile page of logged in user
@@ -67,6 +71,4 @@ class _HomePageState extends State<HomePage> {
           ]),
     );
   }
-
-  
 }

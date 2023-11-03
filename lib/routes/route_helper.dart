@@ -1,3 +1,4 @@
+import 'package:example1/pages/address/address_page.dart';
 import 'package:example1/pages/auth/sign_in_page.dart';
 import 'package:example1/pages/cart/cart_page.dart';
 import 'package:example1/pages/food/popular_food_detail.dart';
@@ -7,7 +8,6 @@ import 'package:get/get.dart';
 import '../pages/food/recomanded_food_detail.dart';
 
 class RouteHelper {
-
 //  define Route Variables
 
   static const String splachPage = '/splach-page';
@@ -16,6 +16,7 @@ class RouteHelper {
   static const String recommendedFood = "/recommended-food";
   static const String cartPage = "/cart-page";
   static const String signIn = "/sign-in";
+  static const String addressPage = "/address-page";
 
 // Route Methods
 
@@ -27,6 +28,7 @@ class RouteHelper {
       '$recommendedFood?pageId=$pageId&page=$page';
   static String getCartPage() => '$cartPage';
   static String getSignInPage() => '$signIn';
+  static String getAddressPage() => '$addressPage';
 
   static List<GetPage> routes = [
     GetPage(name: splachPage, page: () => SplachScreen()),
@@ -67,7 +69,12 @@ class RouteHelper {
         return const SignInPage();
       },
       transition: Transition.fadeIn,
-    )
+    ),
+    GetPage(
+        name: addressPage,
+        page: () {
+          return const AddressPage();
+        })
   ];
 }
 

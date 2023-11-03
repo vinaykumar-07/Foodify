@@ -1,7 +1,9 @@
 import 'package:example1/controller/auth_controller.dart';
 import 'package:example1/controller/cart_controller.dart';
+import 'package:example1/controller/location_controller.dart';
 import 'package:example1/controller/popular_product_controller.dart';
 import 'package:example1/controller/recommended_food_controller.dart';
+import 'package:example1/controller/user_controller.dart';
 import 'package:example1/routes/route_helper.dart';
 import 'package:example1/utilites/app_constants.dart';
 import 'package:example1/utilites/colors.dart';
@@ -11,7 +13,6 @@ import 'package:example1/widgets/big_text.dart';
 import 'package:example1/widgets/small_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 import '../../base/no_data_page.dart';
 /*
 class CartPage extends StatelessWidget {
@@ -507,7 +508,6 @@ class CartPage extends StatelessWidget {
                                                                 _cartList[index]
                                                                     .product!,
                                                                 -1);
-                                                             
                                                           }),
                                                           child: Icon(
                                                             Icons.remove,
@@ -536,7 +536,6 @@ class CartPage extends StatelessWidget {
                                                                 _cartList[index]
                                                                     .product!,
                                                                 1);
-                                                           
                                                           }),
                                                           child: Icon(
                                                             Icons.add,
@@ -619,7 +618,32 @@ class CartPage extends StatelessWidget {
                         onTap: (() {
                           if (Get.find<AuthController>().userLoggedIn()) {
                             cartController.addToHistory();
-                           
+
+                            if (Get.find<LocationController>()
+                                .getAddress
+                                .isNotEmpty) {
+                              print("object");
+                              Get.toNamed(RouteHelper.addressPage);
+                            } 
+                              //  else {
+                            //   var location = Get.find<LocationController>()
+                            //       .getUserAddress();
+                            //   var cart = Get.find<CartController>().getItems;
+                            //   var user = Get.find<UserController>().userModel;
+                            //   PlaceOrderBody placeOrder = PlaceOrderBody(
+                            //     cart: cart,
+                            //     orderAmount: 100.0,
+                            //     orderNote: "Notabout the food",
+                            //     address: location.address,
+                            //     latitude: location.latitude,
+                            //     longitude: location.longitude,
+                            //     contactPersonName: user!.name,
+                            //     contactPersonNumber: user!.phone,
+                            //     scheduledAt: '',
+                            //     distance: 10.0,
+                            //   );  //PlaceOrderBody
+                            //   Get.find<OrderController>()placeOrder(placeOrder, _callback  );
+                            // }
                           } else {
                             Get.toNamed(RouteHelper.getSignInPage());
                           }
@@ -649,5 +673,13 @@ class CartPage extends StatelessWidget {
         },
       ),
     );
+  }
+
+  void _callback(bool isSuccess, String message, String orderID) {
+    if (isSuccess) {
+      Get.find<CartController>().clear();
+      Get.find<CartController>().removeCartSharedprefrence();
+      Get.find<CartController>().addToHistory();
+    }
   }
 }

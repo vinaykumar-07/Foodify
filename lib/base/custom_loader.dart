@@ -8,8 +8,7 @@ class CustomLoder extends StatelessWidget {
   const CustomLoder({super.key});
   @override
   Widget build(BuildContext context) {
-    // print("i am printing the loading state " +
-    //     Get.find<AuthController>().isLoading.toString());
+    
     return Center(
       child: Container(
         height: Dimension.height20 * 5,
