@@ -1,4 +1,4 @@
-# example1
+# Foodify
 
 A new Flutter project.
 
